@@ -1,12 +1,12 @@
 clear all;
-addpath(genpath('/users/purplab/Documents/MATLAB/ID_PL_acuity_Vernier/1_loc/helper functions'))
+addpath(genpath('/users/purplab/Desktop/Ian/PL_vernier/helper functions'))
 addpath(genpath('/users/Shared/Psychtoolbox'))
-addpath(genpath('/users/purplab/Documents/MATLAB/ID_PL_acuity_Vernier/1_loc/palamedes1_6_0'))
+addpath(genpath('/users/purplab/Desktop/Ian/PL_vernier/palamedes1_6_0'))
 PLexoHem_Vernier_defs_1loc_psi; 
 global params; params.practice.run = 0;
 
-params.eye.run = 0;
-params.stairVars.run = 0;
+% params.eye.run = 0;
+% params.stairVars.run = 0;
 params.stim.colorTest = 0;
 
 %initials = 'test'; sesNum = '0';    
@@ -222,14 +222,14 @@ end
 expEndDisp(wPtr);
 
 
-if params.stairVars.run
+
 sesStair = struct('stair', {sesStair}, 'StimNumOnBlock', {params.blockVars.StimNumOnBlock});
-end
+
 
 %%%%%------------- Save all experiment data ----------%%%%%
 c = clock;
 homedir = pwd; 
-dirc = sprintf('results/%s/%s', params.saveVars.expTypeDirName,initials);
+dirc = sprintf('results/%s',initials);
 mkdir(dirc); cd(dirc)
 if params.eye.run; Eyelink('ReceiveFile', ELfileName, dirc,1); Eyelink('CloseFile'); Eyelink('Shutdown'); end
 Screen('Close');
@@ -237,11 +237,9 @@ date = sprintf('Date:%02d/%02d/%4d  Time:%02d:%02d:%02i ', c(2),c(3),c(1),c(4),c
 saveExpFile = sprintf('%s_results_%s_ses%d_%02d_%02d_%4d_time_%02d_%02d_%02i.mat',...
                       params.saveVars.fileName, initials, sesNum,...
                       c(2),c(3),c(1),c(4),c(5),ceil(c(6)));
-if params.stairVars.run                
-    save(saveExpFile ,'expData', 'results','sesNum', 'params', 'date', 'sesStair', 'breakFix');
-else
-    save(saveExpFile ,'expData', 'results','sesNum', 'params', 'date', 'breakFix');
-end
+               
+save(saveExpFile ,'expData', 'results','sesNum', 'params', 'date', 'sesStair', 'breakFix');
+
 cd(homedir);
 %%%%%--------------------------------------------------%%%%%
 

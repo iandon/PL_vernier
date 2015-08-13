@@ -9,7 +9,6 @@ switch params.stim.baseAngle
         instruct = 'Is the right stimulus more UP or DOWN relative to the left stimulus?';
         keys = sprintf('Press ''%s'' for UP or ''%s'' for DOWN. ', params.responseVar.allowedRespKeys(1), params.responseVar.allowedRespKeys(2));
 end
-keys = sprintf('Press ''%s'' for counter-clockwise tilt or ''%s'' for clockwise tilt. ', params.responseVar.allowedRespKeys(1), params.responseVar.allowedRespKeys(2));
 start = 'Press space to start!';
 
 Screen('TextSize', wPtr, params.textVars.size);

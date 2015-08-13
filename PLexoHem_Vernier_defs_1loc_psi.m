@@ -4,7 +4,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 screenVar = struct('num', {1}, 'rectPix',{[0 0  1280 960]}, 'dist', {58},...
                    'size', {[36.2,26.6]}, 'res', {[1280 960]},...
-                   'calib_filename', {'0001_titchener_130226.mat'}); 
+                   'calib_filename', {'0002_titchener_130226.mat'}); 
 screenVar.centerPix = [(screenVar.rectPix(3)/2), (screenVar.rectPix(4)/2)];
     % In a new screen, run:
      %test = Screen('OpenWindow', screenVar.num, [], [0 0 1 1]); 

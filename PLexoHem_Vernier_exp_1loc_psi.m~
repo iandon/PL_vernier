@@ -1,12 +1,12 @@
 clear all;
-addpath(genpath('/users/purplab/Documents/MATLAB/ID_PL_acuity_Vernier/1_loc/helper functions'))
+addpath(genpath('/users/purplab/Desktop/Ian/PL_vernier/helper functions'))
 addpath(genpath('/users/Shared/Psychtoolbox'))
-addpath(genpath('/users/purplab/Documents/MATLAB/ID_PL_acuity_Vernier/1_loc/palamedes1_6_0'))
+addpath(genpath('/users/purplab/Desktop/Ian/PL_vernier/palamedes1_6_0'))
 PLexoHem_Vernier_defs_1loc_psi; 
 global params; params.practice.run = 0;
 
-params.eye.run = 0;
-params.stairVars.run = 0;
+% params.eye.run = 0;
+% params.stairVars.run = 0;
 params.stim.colorTest = 0;
 
 %initials = 'test'; sesNum = '0';    
@@ -146,15 +146,15 @@ for b = 1:numBlocks
         
         switch params.stim.baseAngle
             case 0
-                horizSepDeg = trialProc{i}.offsetDir*params.stairVars.stimRangeREAL(2)*stair.xCurrent;
-                horizSepPix = deg2pix1Dim(horizSepDeg, screenVars.ratioX);
-                trialProc{i}.stimLocsBOTH = [trialProc{i}.stimLocs(1)+horizSepPix,trialProc{i}.stimLocs(2)+stim.vertSeparationPix;...
-                                             trialProc{i}.stimLocs(1)-horizSepPix,trialProc{i}.stimLocs(2)-stim.vertSeparationPix];
+                horizSepDeg = trialProc{i}.offsetDir*params.stairVars.stimMinMax(2)*stair.xCurrent;
+                horizSepPix = deg2pix1Dim(horizSepDeg, params.screenVar.ratioX);
+                trialProc{i}.stimLocsBOTH = [trialProc{i}.stimLocs(1)+horizSepPix/2,trialProc{i}.stimLocs(2)+params.stim.vertSeparationPix/2;...
+                                             trialProc{i}.stimLocs(1)-horizSepPix/2,trialProc{i}.stimLocs(2)-params.stim.vertSeparationPix/2];
             case 90
-                vertSepDeg = trialProc{i}.offsetDir*params.stairVars.stimRangeREAL(2)*stair.xCurrent;
-                vertSepPix = deg2pix1Dim(vertSepDeg, screenVars.ratioY);
-                trialProc{i}.stimLocsBOTH = [trialProc{i}.stimLocs(1)+stim.horizSeparationPix,trialProc{i}.stimLocs(2)+vertSepPix;...
-                                             trialProc{i}.stimLocs(1)-stim.horizSeparationPix,trialProc{i}.stimLocs(2)-vertSepPix];
+                vertSepDeg = trialProc{i}.offsetDir*params.stairVars.stimMinMax(2)*stair.xCurrent;
+                vertSepPix = deg2pix1Dim(vertSepDeg, params.screenVar.ratioY);
+                trialProc{i}.stimLocsBOTH = [trialProc{i}.stimLocs(1)+params.stim.horizSeparationPix/2,trialProc{i}.stimLocs(2)+vertSepPix/2;...
+                                             trialProc{i}.stimLocs(1)-params.stim.horizSeparationPix/2,trialProc{i}.stimLocs(2)-vertSepPix/2];
         end
 
         
@@ -163,7 +163,7 @@ for b = 1:numBlocks
                                               trialProc{i}.preCue.locs, trialProc{i}.angle,...
                                               trialProc{i}.stimLocsBOTH, trialProc{i}.postCueLocs,...
                                               cont, targetAngle, trialProc{i}.phase_offset,...
-                                              trialProc{i}.targets.validity,trialProc{i}.targets.angle,trialProc{i}.offsetDir);
+                                              trialProc{i}.targets.validity,trialProc{i}.angle,trialProc{i}.offsetDir);
                                           
         if breakFix.Block.check == 1
             beep3(237,157,.1,0);
@@ -222,9 +222,9 @@ end
 expEndDisp(wPtr);
 
 
-if params.stairVars.run
+
 sesStair = struct('stair', {sesStair}, 'StimNumOnBlock', {params.blockVars.StimNumOnBlock});
-end
+
 
 %%%%%------------- Save all experiment data ----------%%%%%
 c = clock;
