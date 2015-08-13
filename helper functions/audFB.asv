@@ -1,0 +1,6 @@
+function audFB(correctTrial)
+PLexp_defs; global params;
+
+if correctTrial
+    beep2(w,t)
+end

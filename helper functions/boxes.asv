@@ -1,0 +1,42 @@
+function boxes(wPtr, centerOfBox)
+screen_defs; global stim, fixationVar;
+
+rect = CenterRectOnPoint([0 0 box.slopH box.slopV], centerOfBox(1), centerOfBox(2));
+
+%%%   Upper left corner %%%
+%Upper left horizontal
+x1= rect(1);
+x2 = x1 + box.sizePixels;
+y1 = rect(2); 
+y2 = y1;
+Screen('DrawLine',wPtr, box.color, x1, y1, x2, y2, box.penWidth);
+
+%Upper left vertical
+x1= rect(1);
+x2 = x1;
+y1 = rect(2);
+y2 = y1 - box.sizePixels;
+Screen('DrawLine',wPtr, box.color, x1, y1, x2, y2, box.penWidth);
+
+%%%   Upper left corner %%%
+%Upper right horizontal
+x1= rect(3);
+x2 = x1 - box.sizePixels;
+y1 = rect(2); 
+y2 = y1;
+Screen('DrawLine',wPtr, box.color, x1, y1, x2, y2, box.penWidth);
+
+%Upper right vertical
+x1= rect(3);
+x2 = x1;
+y1 = rect(2); 
+y2 = y1 - box.sizePixels;
+Screen('DrawLine',wPtr, box.color, x1, y1, x2, y2, box.penWidth);
+
+%Upper right
+xUR= rect(3);
+xUR_1 = xUR - box.sizePixels;
+Screen('DrawLine',wPtr, box.color, xUR, yH, xUR_1, yH, box.penWidth);
+
+
+

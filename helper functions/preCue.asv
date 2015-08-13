@@ -1,0 +1,13 @@
+function preCue(type, wPtr)
+screen_defs; global precueExg;
+type =2; 
+
+if type ==1 % exogenous    
+    
+else
+    if type ==2 % endogenous
+        Screen('FillOval', wPtr ,precueExg.color, fix.rect, fix.rect);
+        Screen('Flip', wPtr); 
+        WaitSecs(3);
+    end
+end   

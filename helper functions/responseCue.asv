@@ -1,0 +1,24 @@
+function resp = responseCue(typeRespCue)
+global responseVar; 
+resp = struct('rt', 0, 'key', 0);
+
+keyIsDown = 0;
+secs1 = GetSecs;
+t = tic;
+while (~keyIsDown)&& t<responseVar.time)
+    [keyIsDown,secs2,keyCode] = KbCheck;
+    if keyIsDown ==1
+        %check if key pressed was allowed one and if so end the trial
+        if sum(find(keyCode)== responseVar.allowedRespKeys),   
+            resp.key = find(keyCode);
+            resp.rt = secs2-secs1;   
+            break;
+        end 
+        if keyCode(kbname('esc')),        screen('CloseAll'); error('Experiment stopped by user!'); break;  end
+    end
+end
+if keyIsDown ==0
+            resp.key = find(keyCode);
+            resp.rt = secs2-secs1;   
+            break;
+        end 

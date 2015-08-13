@@ -1,0 +1,77 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%      screen params
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+global screenVar; 
+screenVar = struct('num', {0}, 'rect',{[0 0 500 500]}, 'bkColor',{[0 0 0]}, 'center', {[0 0]}); 
+screenVar.center = [screenVar.rect(3)/2 screenVar.rect(4)/2];
+    % In a new screen, run:
+    % test = Screen('OpenWindow', screenVar.num, [], [0 0 1 1]); 
+    % white = WhiteIndex(test);
+    % black = BlackIndex(test);
+    % Screen('CloseAll');
+white = 255; black = 0;
+gray = (white+black)/2; 
+screenVar.bkColor = gray;
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%      stimuli params 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+global stim; 
+stim = struct('sizePixels', {[100 100]}, 'cyclesPerImage', {20}, 'phase_offset', {0},...
+    'rect', {[0 0 100 100]},'dur', {2}, 'possibleAngels', {[90, 0]}, 'num', {2},...
+    'XdistancePixels',{100}, 'YdistancePixels', {0}, 'location', {screenVar.center});  
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%      fixation params
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+global fixationVar; 
+fixationVar = struct('rectSize', {50}, 'rect',{[0 0 0 0]}, 'color',{[255 255 255]}, 'bkColor', {[0 0 0]},...
+    'size', {15}, 'dur', {1}, 'penWidth', {5}); 
+fixationVar.rect = [0 0 fixationVar.rectSize fixationVar.rectSize];
+fixationVar.rect = CenterRectOnPoint(fixationVar.rect, screenVar.center(1), screenVar.center(2));
+
+fixationVar.bkColor = screenVar.bkColor;
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%      pre cue params
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+global precueExg; 
+precueExg = struct('size', {15}, 'locations', {[0 0]}, 'rectSize', {[50,200]}, 'rect',{[0 0 0 0]}, 'color',{white}, ...
+                    'bkColor', {screenVar.bkColor}, 'dur', {1}, 'penWidth', {5}); 
+precueExg.locations = [screenVar.center(1)+100, screenVar.center(2);screenVar.center(1)-100, screenVar.center(2)];
+precueExg.rect = [0 0 precueExg.size precueExg.size];
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     box params
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+global box; 
+box = struct('sizePixels', {30}, 'location', {[0 0]}, 'rect',{[0 0 0 0]}, 'color',{white}, ...
+                    'bkColor', {screenVar.bkColor}, 'dur', {2}, 'penWidth', {5},...
+                    'slopeV', {300}, 'slopeH',{150}); 
+box.location = stim.location;
+box.rect = CenterRectOnPoint([0 0 box.slopeH box.slopeV], stim.location(1), stim.location(2));
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     post cue params
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+global postCueVar; 
+postCueVar = struct('color',{black},'bkColor', {screenVar.bkColor}, 'dur', {2}, 'penWidth', {3},...
+                    'size', {30}, 'center', {screenVar.center}); 
+                
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     response params
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+global responseVar; 
+responseVar = struct( 'allowedRespKeys', {[',', '.']},'allowedRespKeysCodes',{[0 0]}, 'time',{2}); 
+for i = 1:length(responseVar.allowedRespKeys)
+    responseVar.allowedRespKeysCodes(i) = KbName(responseVar.allowedRespKeys(i));
+end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+params = struct('screenVar', screenVar, 'stim', stim, 'fixationVar', fixationVar, 'precueExg', ...
+        precueExg, 'box', box, 
+
+

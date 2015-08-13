@@ -1,0 +1,1 @@
+function results = calcResults(results, resp, correct,rt, typeRespCue, cueLocation, angles, stimLocations, constrast);

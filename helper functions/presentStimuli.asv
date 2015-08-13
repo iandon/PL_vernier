@@ -1,0 +1,26 @@
+function presentStimuli(wPtr, trialAngels, locations, constrast)
+PLexp_defs; global params; 
+% Inpute:
+% Angles - is an array of angles to present each gabor
+% locations - is a matrix of n*2 location of each corresponding stimulus
+% This function will draw all the stimuli rotated by angles in the specific
+% location
+if (nargin<4), constrast = 255*ones(length(angles),1); end
+if (length(trialAngels)~= params.stim.num), error('In order to present all stimuli correctly, the amount of angles should match the amount of stimuli pressented.'); end
+if (length(locations)~=params.stim.num), error('In order to present all stimuli correctly, the amount of locations should match the amount of stimuli pressented.'); end
+
+%Compute grating
+grating = genGrating(params.stim.sizePix, params.stim.cyclesPerImage, params.stim.phase_offset);
+mask = My2DGauss_nonSym(params.stim.sizePix ,0,1);
+gabor = grating.*mask;
+    
+for i =1:params.stim.num
+    %texture = constrast(i).*(gabor-min(gabor)/(max(gabor)-min(gabor)));
+    texture = (gabor-min(gabor)/(max(gabor)-min(gabor)));
+    
+    %display grating
+    rect =  CenterRectOnPoint(params.stim.rectPix, locations(i,1), locations(i,2));%rect of stimulus, to be centered at location
+    textureIndex=Screen('MakeTexture', wPtr, texture); 
+    Screen('DrawTexture', wPtr, textureIndex, [], rect, trialAngels(i));
+end
+

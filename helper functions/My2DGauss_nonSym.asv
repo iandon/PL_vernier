@@ -1,0 +1,10 @@
+function result = My2DGauss_nonSym(pixels,mean, sd)
+    
+    x1 = [-2*pi: 4*pi/pixels(1) : 2*pi];
+    y1 = (-(x1-mean).^2) /(2*sd^2);
+    f1 = (1/(sd*sqrt(2*pi))) * exp(y1);
+    fx1 = f1'*f1;
+    
+    result = fx(1:pixels(1), 1:pixels(2));
+    
+    

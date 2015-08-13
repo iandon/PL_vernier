@@ -1,0 +1,19 @@
+function postCue(wPtr, targetLocation)
+PLexp_defs; global params;
+
+% cuedLocation is the location of the stimulus that is cued. The post cue line will be from the 
+% center of the screen (postCueVar.center, can be updated in the defs to
+% the cued location. The length of the line is defined by the defs postCueVar.size.
+
+x1 = params.postCueVar.center(1);
+y1 = params.postCueVar.center(2);
+%total distance, from center to location of cued stimuli
+distance = sqrt((x1-targetLocation(1))^2 + (y1-targetLocation(2))^2); 
+
+prop = params.postCueVar.size/distance;
+
+postCuex2 = [prop*x1 + (1-prop)*targetLocation(1)];
+postCuey2 = [prop*y1 + (1-prop)*targetLocation(2)]/distance;
+
+Screen('DrawLine',wPtr, postCueVar.color, x1, y1, postCuex2, postCuey2, postCueVar.penWidth);
+

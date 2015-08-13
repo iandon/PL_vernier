@@ -1,0 +1,12 @@
+function preCueEx(wPtr, type, cueLocation)
+screen_defs; global precueExg;
+type =2; 
+
+if type ==1 % exogenous    
+    
+else
+    if type ==2 % endogenous
+        rect = CenterRectOnPoint(precueExg.rect, , stim.location(2));
+        Screen('FillOval', wPtr ,precueExg.color, rect);
+    end
+end   
