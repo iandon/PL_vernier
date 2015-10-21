@@ -1,4 +1,4 @@
-function [fixBreak, correctTrial, resp, timestamp] = trial(wPtr, blockNum, trialNum, stimLocNum, cueLocation, trialAngles, stimLocations, postCueLocation, constrast, targetAngle, phase_offset, validity,angleOffset,offsetDir)
+function [fixBreak, correctTrial, resp, timestamp] = trial(wPtr, blockNum, trialNum, stimLocNum, cueLocation, trialAngles, stimLocations, postCueLocation, contrast, targetAngle, phase_offset, validity,angleOffset,offsetDir)
 global params; 
 
 
@@ -84,7 +84,7 @@ while ~fixBreak && (ts < cumulativeDur.total) && ~pressQ
         if preCueOFF < 2 , preCueOFF = preCueOFF + 1; end
     elseif ts < cumulativeDur.stim
         if stimON == 1, Eyelink('Message', sprintf('Stimulus ON')); end
-        presentStimuli(wPtr, trialAngles, stimLocations, constrast, phase_offset);
+        presentStimuli(wPtr, trialAngles, stimLocations, contrast, phase_offset);
         fixation(wPtr); Screen('Flip', wPtr);
         timestamp.stim = ts;
         if stimON < 2, stimON = stimON + 1; end

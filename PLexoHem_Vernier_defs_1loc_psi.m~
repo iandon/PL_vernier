@@ -4,7 +4,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 screenVar = struct('num', {1}, 'rectPix',{[0 0  1280 960]}, 'dist', {58},...
                    'size', {[36.2,26.6]}, 'res', {[1280 960]},...
-                   'calib_filename', {'0001_titchener_130226.mat'}); 
+                   'calib_filename', {'0002_titchener_130226.mat'}); 
 screenVar.centerPix = [(screenVar.rectPix(3)/2), (screenVar.rectPix(4)/2)];
     % In a new screen, run:
      %test = Screen('OpenWindow', screenVar.num, [], [0 0 1 1]); 
@@ -24,7 +24,7 @@ ratioY = ratio(2); screenVar.ratioY = ratio(2);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%      stimuli params 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-stim = struct('sizeDeg', {[1 1]}, 'cyclesPerImage', {8}, 'dur', {.2},...
+stim = struct('sizeDeg', {[1 1]}, 'cyclesPerImage', {4}, 'dur', {.2},...
               'num', {2},'XdistDeg',{0}, 'YdistDeg', {0},...
               'radiusDeg', {5},'polarAng', {45},'bkColor', {screenVar.bkColor},...
               'trainLoc', {1}, 'orderType',{'A'}, 'baseAngle',0,... %MOST IMPORTANT to change per observer/session type
@@ -207,7 +207,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%      Trial params
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-trialVars = struct('numTrialsInBlock', {40});
+trialVars = struct('numTrialsInBlock', {50});
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%      Feedback params
@@ -272,8 +272,8 @@ textVars = struct('color', black, 'bkColor', gray, 'size', 24);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%      Save Data params 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-saveVars = struct('fileName', {'PLexoHem'}, 'expTypeDirName', {'1loc_psi'}, 'SubjectInitials', {'IMD'});
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%_
+saveVars = struct('fileName', {'PLexoHem'}, 'expTypeDirName', {'1loc_psi_Vernier'}, 'SubjectInitials', {'IMD'});
 
 
 %-------------------------------------------------------------------------%

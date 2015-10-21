@@ -24,13 +24,13 @@ ratioY = ratio(2); screenVar.ratioY = ratio(2);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%      stimuli params 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-stim = struct('sizeDeg', {[1 1]}, 'cyclesPerImage', {8}, 'dur', {.2},...
+stim = struct('sizeDeg', {[1 1]}, 'cyclesPerImage', {5}, 'dur', {.2},...
               'num', {2},'XdistDeg',{0}, 'YdistDeg', {0},...
               'radiusDeg', {5},'polarAng', {45},'bkColor', {screenVar.bkColor},...
               'trainLoc', {1}, 'orderType',{'A'}, 'baseAngle',0,... %MOST IMPORTANT to change per observer/session type
               'pilot', {0},'separationDeg',{1});
 
-stim.contrast = .64; 
+stim.contrast = .8; 
 
 stim.XdistDeg = stim.radiusDeg*cosd(stim.polarAng);
 stim.YdistDeg = stim.radiusDeg*sind(stim.polarAng);
@@ -216,7 +216,7 @@ fbVars = struct('dur', {0.1}, 'durNoResp', {.4}, 'high', {300}, 'low', {150});
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%      Block params
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-blockVars = struct('numBlocks', 4);
+blockVars = struct('numBlocks', 12);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%      Stair params

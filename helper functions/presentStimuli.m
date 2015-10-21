@@ -12,22 +12,27 @@ if (nargin<5), phase_offset = zeros(length(angles),1); end
 
 %Compute grating
 grating = genGrating(params.stim.sizePix, params.stim.cyclesPerImage, phase_offset);
-mask = My2DGauss_nonSym(params.stim.sizePix ,0,2);
-gabor = grating.*mask;
+mask = My2DGauss_nonSym(params.stim.sizePix,0,2.5);%2);
+gaborStim = grating.*(mask./(max(mask(:))));
+
+% 
+% for i =1:params.stim.num
+texture = params.stim.bkColor + 128*cont.*gaborStim;
+    
+%display grating
+rect1 =  CenterRectOnPointd(params.stim.rectPix, locations(1,1), locations(1,2));%rect of stimulus, to be centered at location
+rect2 =  CenterRectOnPointd(params.stim.rectPix, locations(2,1), locations(2,2));%rect of stimulus, to be centered at location
 
 
-for i =1:params.stim.num
-    texture = params.stim.bkColor + 128*cont.*gabor;
-    
-    %display grating
-    rect =  CenterRectOnPointd(params.stim.rectPix, locations(i,1), locations(i,2));%rect of stimulus, to be centered at location
-    
-    
-    if params.stim.colorTest == 1
-        Screen('FrameOval', wPtr, params.stim.color(trialAngles,:), rect, 3, 3);
-    else
-    textureIndex=Screen('MakeTexture', wPtr, texture); 
-    Screen('DrawTexture', wPtr, textureIndex, [], rect, trialAngles);
-    end
+if params.stim.colorTest == 1
+    Screen('FrameOval', wPtr, params.stim.color(trialAngles,:), rect, 3, 3);
+else
+    textureIndex=Screen('MakeTexture', wPtr, texture);
+    Screen('DrawTexture', wPtr, textureIndex, [], rect1, trialAngles);
+    Screen('DrawTexture', wPtr, textureIndex, [], rect2, trialAngles);
+end
+
+
+
 end
 

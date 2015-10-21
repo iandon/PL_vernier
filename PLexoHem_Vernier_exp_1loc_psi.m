@@ -2,14 +2,17 @@ clear all;
 addpath(genpath('/users/purplab/Desktop/Ian/PL_vernier/helper functions'))
 addpath(genpath('/users/Shared/Psychtoolbox'))
 addpath(genpath('/users/purplab/Desktop/Ian/PL_vernier/palamedes1_6_0'))
-PLexoHem_Vernier_defs_1loc_psi; 
+
+
+PLexoHem_Vernier_defs_1loc_psi_YZ; 
+
 global params; params.practice.run = 0;
 
 % params.eye.run = 0;
 % params.stairVars.run = 0;
 params.stim.colorTest = 0;
 
-%initials = 'test'; sesNum = '0';    
+%initials = 'test'; sesNum = '0';
 initials = input('Please enter subject initials: \n', 's'); initials = upper(initials);
 params.subj.gender = input('Please enter subject GENDER: M/F/O \n', 's');
 params.subj.age = input('Please enter subject AGE: \n', 's');
@@ -18,7 +21,7 @@ sesTypequest = input('Test(0) or Training(1)? \n', 's'); sesType = str2double(se
 % TRAIN LOCATION is in Plexp_defs file -> Make sure it is the right one!
 
 if (sesNumquest > 1) && ~strcmp(initials,params.saveVars.SubjectInitials)
-     error('Check if settings file used is correct for this participant'); 
+    error('Check if settings file used is correct for this participant'); 
 end
 
 if sesType == 0; params.preCue.type = 0; end 
@@ -50,10 +53,17 @@ if sesType == 0,
     end
 elseif sesType == 1
     params.stim.order = [1,1,1,1];
+    params.blockVars.StimNumOnBlock = params.stim.possibleStimNums([1,1,1,1]);
 else
     error('Session type must be 1 (training) or 0 (test)')
 end
 
+
+if ~mod(params.blockVars.numBlocks/4,1)
+    params.blockVars.StimNumOnBlock = repmat(params.blockVars.StimNumOnBlock,[params.blockVars.numBlocks/4,1]);
+else
+    error('Number of blocks must be a multiple of 4')
+end
 
 %params.screenVar.num
 wPtr = Screen('OpenWindow', params.screenVar.num, params.screenVar.bkColor, params.screenVar.rectPix);

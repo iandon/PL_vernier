@@ -1,4 +1,4 @@
-function result = My2DGauss_nonSym(pixels,mean, sd)
+function result = My2DGauss_nonSym(pixels,mean,sd)
 
     x1 = [-2*pi: 4*pi/pixels(1) : 2*pi - 4*pi/pixels(1)];
     y1 = (-(x1-mean).^2) /(2*sd^2);
